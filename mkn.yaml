@@ -1,0 +1,14 @@
+#! clean build -dtKOa "-fPIC" -p usage -W 9
+
+name: mkn.mod
+
+parent: headers
+
+profile:
+- name: headers
+  inc: inc
+  dep: mkn.kul parse.yaml
+
+- name: usage
+  parent: headers
+  main: tst/usage.cpp
