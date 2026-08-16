@@ -31,41 +31,32 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MKN_MOD_DEF_HPP
 #define MKN_MOD_DEF_HPP
 
-#include <string>
-#include <utility>
-#include <vector>
+#include "mkn/kul/lang/def.hpp"
 
 #include "yaml-cpp/yaml.h"
 
 namespace mkn::mod {
 
-enum class Mode { NONE = 0, STAT, SHAR };
+using Mode = mkn::kul::lang::Mode;
+using CompilationInfo = mkn::kul::lang::CompilationInfo;
+using CompileCommand = mkn::kul::lang::CompileCommand;
+using CompileEnv = mkn::kul::lang::CompileEnv;
+using Exception = mkn::kul::lang::Exception;
 
-// Stable, versioned surface a maiken::Application implements and a Module
-// is handed at each build phase. Only append new virtuals here - never
-// remove or reorder - so modules built against an older mkn.mod keep working
-// unmodified against a newer maiken.
-class Context {
- public:
-  virtual ~Context() = default;
+using ContextState = mkn::kul::lang::ContextState;
+using CompilerState = mkn::kul::lang::CompilerState;
+using AbstractCompilerInput = mkn::kul::lang::AbstractCompilerInput;
+using IncludeInput = mkn::kul::lang::IncludeInput;
+using LibPathInput = mkn::kul::lang::LibPathInput;
+using LibInput = mkn::kul::lang::LibInput;
+using LinkPrefixInput = mkn::kul::lang::LinkPrefixInput;
+using BuildModeInput = mkn::kul::lang::BuildModeInput;
+using CompilationInfoInput = mkn::kul::lang::CompilationInfoInput;
 
-  virtual std::string projectDir() const = 0;
-  virtual std::vector<std::pair<std::string, bool>> const& includes() const = 0;
-  virtual void addInclude(std::string const& s, bool const is_public = true) = 0;
-  virtual void addLibpath(std::string const& s) = 0;
-  virtual void addLib(std::string const& s) = 0;
-  virtual void prependLinkString(std::string const& s) = 0;
-  // Named dependents()/buildMode() rather than revendencies()/mode() so a
-  // maiken::Application (which already has same-named, differently-typed
-  // members) can implement both without a return-type-only overload clash.
-  virtual std::vector<Context*> dependents() const = 0;
-  virtual Mode buildMode() const = 0;
-
-  // Escape hatch for modules needing something not yet exposed above.
-  // Returns the concrete maiken::Application*, so pulling in maiken/app.hpp
-  // (and its ABI risk) is opt-in per-module rather than forced on everyone.
-  virtual void* application() = 0;
-};
+// Stable, versioned surface a maiken::Application implements and a Module is
+// handed at each build phase. Promoted to mkn.kul as mkn::kul::lang::Context -
+// this alias keeps existing module sources (mkn::mod::Context) unchanged.
+using Context = mkn::kul::lang::Context;
 
 class Module {
  public:

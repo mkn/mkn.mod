@@ -31,6 +31,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MKN_MOD_INIT_HPP
 #define MKN_MOD_INIT_HPP
 
+#ifdef MKN_KUL_DEFS_HPP
+#error  // bad include order
+#endif  // MKN_KUL_DEFS_HPP
+
+#define MKN_KUL_EXPORT
+#include "mkn/kul/defs.hpp"  // IWYU pragma: keep
+
 // This is what module.cpp implementations include. It pulls in only the
 // thin mkn::mod::Context/Module interface (def.hpp) - not maiken's
 // Application/Project/compiler internals, yaml-cpp aside - then forces
@@ -38,10 +45,5 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // extern "C" maiken_module_construct/destruct symbols a module exports get
 // correct dllexport/visibility attributes on the shared-library boundary.
 #include "mkn/mod/def.hpp"  // IWYU pragma: keep
-
-#define MKN_KUL_EXPORT
-#undef MKN_KUL_DEFS_HPP
-#undef MKN_KUL_OS_DEF_HPP
-#include "mkn/kul/defs.hpp"
 
 #endif  // MKN_MOD_INIT_HPP
