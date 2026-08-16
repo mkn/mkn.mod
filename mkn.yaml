@@ -1,4 +1,4 @@
-#! clean build -dtKOa "-fPIC" -p usage -W 9
+#! clean build -dtKOa "-fPIC" -p test -W 9
 
 name: mkn.mod
 
@@ -7,8 +7,8 @@ parent: headers
 profile:
 - name: headers
   inc: inc
-  dep: mkn.kul parse.yaml
+  dep: mkn.kul parse.yaml[headers]
 
-- name: usage
+- name: test
   parent: headers
-  main: tst/usage.cpp
+  test: tst/test.cpp
