@@ -1,4 +1,7 @@
 #include "mkn/mod/init.hpp"
+#include "mkn/mod/loader.hpp"
+
+#include "mkn/kul/os.hpp"
 
 #include <iostream>
 
@@ -34,23 +37,28 @@ class FakeContext : public mkn::mod::Context, public mkn::mod::CompilerState {
   mkn::mod::Mode m = mkn::mod::Mode::SHAR;
 };
 
-class UsageModule : public mkn::mod::Module {
- public:
-  void compile(mkn::mod::Context& c, YAML::Node const&) override {
-    c.compilerState().add(mkn::mod::IncludeInput{"./inc", true});
+mkn::kul::File find_test_module() {
+  mkn::kul::Dir dir("bin/test_mod");
+  for (auto const& f : dir.files(0)) {
+    auto const& name = f.name();
+    auto const dot = name.rfind(".");
+    if (dot == std::string::npos) continue;
+#if MKN_KUL_IS_WIN
+    if (name.substr(dot + 1) == "dll") return mkn::kul::File(f.real());
+#else
+    if (name.substr(dot + 1) == "so") return mkn::kul::File(f.real());
+#endif
   }
-};
+  KEXCEPTION("No loadable test module found in ", dir.escr());
+}
 
 }  // namespace
 
-extern "C" MKN_KUL_PUBLISH mkn::mod::Module* maiken_module_construct() { return new UsageModule; }
-extern "C" MKN_KUL_PUBLISH void maiken_module_destruct(mkn::mod::Module* p) { delete p; }
-
 int main() {
+  mkn::mod::Loader loader(find_test_module());
   FakeContext ctx;
-  UsageModule mod;
   YAML::Node node;
-  mod.compile(ctx, node);
+  loader.module()->compile(ctx, node);
   std::cout << "mkn.mod usage OK, includes=" << ctx.includes().size() << std::endl;
   return 0;
 }

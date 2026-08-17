@@ -1,4 +1,4 @@
-#! clean build -dtKOa "-fPIC" -p test -W 9
+#! clean build test run -p test_mod,test -W 9
 
 name: mkn.mod
 
@@ -9,6 +9,18 @@ profile:
   inc: inc
   dep: mkn.kul parse.yaml[headers]
 
+- name: test_mod
+  parent: headers
+  src: tst/mod/mod.cpp
+  out: test_mod
+  mode: shared
+  if_arg:
+    shared: -DMKN_KUL_SHARED
+
 - name: test
   parent: headers
   test: tst/test.cpp
+  if_dep:
+    win: parse.yaml[lib]
+  if_arg:
+    win_static: -DYAML_CPP_STATIC_DEFINE
