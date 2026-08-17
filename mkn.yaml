@@ -16,8 +16,11 @@ profile:
   mode: shared
   if_arg:
     shared: -DMKN_KUL_SHARED
-    win_shared: -DYAML_CPP_DLL
 
 - name: test
   parent: headers
   test: tst/test.cpp
+  if_dep:
+    win: parse.yaml[lib]
+  if_arg:
+    win_static: -DYAML_CPP_STATIC_DEFINE
