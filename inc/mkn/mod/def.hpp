@@ -31,9 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MKN_MOD_DEF_HPP
 #define MKN_MOD_DEF_HPP
 
-#include "mkn/kul/lang/def.hpp"
+#include "mkn/kul/lang/def.hpp"  // IWYU pragma: export
 
-#include "yaml-cpp/yaml.h"
+#include "yaml-cpp/yaml.h"  // IWYU pragma: export
 
 namespace mkn::mod {
 

@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "mkn/mod/init.hpp"
 
+#include <string>
+
 namespace {
 
 class UsageModule : public mkn::mod::Module {

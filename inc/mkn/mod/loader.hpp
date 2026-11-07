@@ -31,9 +31,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef MKN_MOD_LOADER_HPP
 #define MKN_MOD_LOADER_HPP
 
-#include "mkn/mod/def.hpp"
-
+#include "mkn/mod/def.hpp"  // IWYU pragma: export
 #include "mkn/kul/sys.hpp"
+
+#include <string>
+
+namespace mkn {
+namespace kul {
+class File;
+}  // namespace kul
+}  // namespace mkn
 
 namespace mkn::mod {
 
