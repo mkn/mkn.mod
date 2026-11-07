@@ -1,9 +1,12 @@
 #include "mkn/mod/init.hpp"
 #include "mkn/mod/loader.hpp"
-
 #include "mkn/kul/os.hpp"
+#include "mkn/kul/except.hpp"
 
 #include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace {
 

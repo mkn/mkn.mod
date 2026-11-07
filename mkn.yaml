@@ -24,3 +24,12 @@ profile:
     win: parse.yaml[lib]
   if_arg:
     win_static: -DYAML_CPP_STATIC_DEFINE
+
+# include-what-you-use report for inc/ and tst/, needs iwyu on PATH
+- name: iwyu
+  parent: test_mod
+  mod:
+  - name: cpp.iwyu
+    compile:
+      paths: inc tst
+      headers: -x c++-header

@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif  // MKN_KUL_DEFS_HPP
 
 #define MKN_KUL_EXPORT
-#include "mkn/kul/defs.hpp"  // IWYU pragma: keep
+#include "mkn/kul/defs.hpp"  // IWYU pragma: export
 
 // This is what module.cpp implementations include. It pulls in only the
 // thin mkn::mod::Context/Module interface (def.hpp) - not maiken's
@@ -44,6 +44,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // mkn/kul/defs.hpp to reprocess with MKN_KUL_EXPORT defined, so the
 // extern "C" maiken_module_construct/destruct symbols a module exports get
 // correct dllexport/visibility attributes on the shared-library boundary.
-#include "mkn/mod/def.hpp"  // IWYU pragma: keep
+#include "mkn/mod/def.hpp"  // IWYU pragma: export
 
 #endif  // MKN_MOD_INIT_HPP
