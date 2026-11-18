@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "mkn/mod/def.hpp"  // IWYU pragma: export
 #include "mkn/kul/sys.hpp"
 
+#include <filesystem>
 #include <string>
 
 namespace mkn {
@@ -50,9 +51,10 @@ class Loader : public mkn::kul::sys::SharedClass<Module> {
   Module* p_ = nullptr;
 
  public:
-  Loader(mkn::kul::File const& f, std::string const& construct_sym = "maiken_module_construct",
+  Loader(std::filesystem::path const& p,
+         std::string const& construct_sym = "maiken_module_construct",
          std::string const& destruct_sym = "maiken_module_destruct")
-      : mkn::kul::sys::SharedClass<Module>(f, construct_sym, destruct_sym) {
+      : mkn::kul::sys::SharedClass<Module>(p, construct_sym, destruct_sym) {
     construct(p_);
     loaded_ = 1;
   }
