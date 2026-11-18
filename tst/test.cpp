@@ -58,7 +58,7 @@ mkn::kul::File find_test_module() {
 }  // namespace
 
 int main() {
-  mkn::mod::Loader loader(find_test_module());
+  mkn::mod::Loader loader(find_test_module().real());
   FakeContext ctx;
   YAML::Node node;
   loader.module()->compile(ctx, node);
