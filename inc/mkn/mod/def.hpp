@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "mkn/kul/lang/def.hpp"  // IWYU pragma: export
 
-#include "yaml-cpp/yaml.h"  // IWYU pragma: export
+#include "mkn/kul/bon.hpp" // IWYU pragma: export
 
 namespace mkn::mod {
 
@@ -59,15 +59,21 @@ using CompilationInfoInput = mkn::kul::lang::CompilationInfoInput;
 // this alias keeps existing module sources (mkn::mod::Context) unchanged.
 using Context = mkn::kul::lang::Context;
 
+// a module's configuration from the project's mkn.yaml (or the -m / inline bon
+// string), read only:
+//  maps, lists and strings (scalars stay text); see mkn/kul/bon.hpp. Optional
+//  keys: find()
+using Node = mkn::kul::bon::Node;
+
 class Module {
  public:
   virtual ~Module() = default;
 
-  virtual void init(Context&, YAML::Node const&) {}
-  virtual void compile(Context&, YAML::Node const&) {}
-  virtual void link(Context&, YAML::Node const&) {}
-  virtual void test(Context&, YAML::Node const&) {}
-  virtual void pack(Context&, YAML::Node const&) {}
+  virtual void init(Context &, Node const &) {}
+  virtual void compile(Context &, Node const &) {}
+  virtual void link(Context &, Node const &) {}
+  virtual void test(Context &, Node const &) {}
+  virtual void pack(Context &, Node const &) {}
 };
 
 }  // namespace mkn::mod

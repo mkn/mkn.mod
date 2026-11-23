@@ -40,7 +40,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // This is what module.cpp implementations include. It pulls in only the
 // thin mkn::mod::Context/Module interface (def.hpp) - not maiken's
-// Application/Project/compiler internals, yaml-cpp aside - then forces
+// Application/Project/compiler internals, nor yaml-cpp - then forces
 // mkn/kul/defs.hpp to reprocess with MKN_KUL_EXPORT defined, so the
 // extern "C" maiken_module_construct/destruct symbols a module exports get
 // correct dllexport/visibility attributes on the shared-library boundary.
