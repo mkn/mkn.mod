@@ -6,6 +6,7 @@ property:
   # dependency versions, only here: master on master, latest on the latest branch, releases pinned in tags
   mkn.kul.version: master
   parse.yaml.version: master
+  cpp.iwyu.version: master
 
 parent: headers
 
@@ -35,6 +36,7 @@ profile:
   parent: test_mod
   mod:
   - name: cpp.iwyu
+    version: ${cpp.iwyu.version}
     compile:
       paths: inc tst
       headers: -x c++-header
