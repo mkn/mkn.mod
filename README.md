@@ -16,7 +16,7 @@ namespace {
 
 class UsageModule : public mkn::mod::Module {
  public:
-  void compile(mkn::mod::Context& c, YAML::Node const&) override {
+  void compile(mkn::mod::Context& c, mkn::mod::Node const&) override {
     c.compilerState().add(mkn::mod::IncludeInput{"./inc", true});
   }
 };
@@ -50,4 +50,4 @@ mkn clean build test run -p test_mod,test -W 9
 
 ## Dependencies
 
-[mkn.kul](https://github.com/mkn/mkn.kul), [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+[mkn.kul](https://github.com/mkn/mkn.kul) (header only; a module's configuration is a `mkn::kul::bon::Node`)
