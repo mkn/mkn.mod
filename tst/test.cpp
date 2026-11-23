@@ -60,7 +60,7 @@ mkn::kul::File find_test_module() {
 int main() {
   mkn::mod::Loader loader(find_test_module().real());
   FakeContext ctx;
-  mkn::mod::Node const node; // no configuration: an empty map
+  mkn::mod::Node const node;  // no configuration: an empty map
   loader.module()->compile(ctx, node);
   std::cout << "mkn.mod usage OK, includes=" << ctx.includes().size() << std::endl;
   return 0;

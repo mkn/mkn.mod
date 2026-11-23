@@ -36,9 +36,9 @@ namespace {
 
 class UsageModule : public mkn::mod::Module {
  public:
-   void compile(mkn::mod::Context &c, mkn::mod::Node const &) override {
-     c.compilerState().add(mkn::mod::IncludeInput{"./inc", true});
-   }
+  void compile(mkn::mod::Context& c, mkn::mod::Node const&) override {
+    c.compilerState().add(mkn::mod::IncludeInput{"./inc", true});
+  }
 };
 
 }  // namespace
